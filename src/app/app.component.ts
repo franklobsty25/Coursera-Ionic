@@ -10,6 +10,7 @@ export class AppComponent {
     { title: 'Menu', url: '/menu/Menu', icon: 'list' },
     { title: 'About', url: '/about/About', icon: 'information-circle' },
     { title: 'Contact', url: '/contact/Contact', icon: 'person' },
+    { title: 'Favorites', url: '/favorites/Favorites', icon: 'heart'},
   ];
   
   constructor() {}
