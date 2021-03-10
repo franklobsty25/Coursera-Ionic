@@ -2,6 +2,7 @@
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
+      <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>Dish Detail</ion-title>
   </ion-toolbar>
@@ -46,5 +47,16 @@
       </ion-item>
     </ion-list>
   </ion-card>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="addToFavorites()">
+      <ion-icon name="heart-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="favorite">
+    <ion-fab-button>
+      <ion-icon name="heart"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 
 </ion-content>

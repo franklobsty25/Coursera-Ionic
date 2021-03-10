@@ -12,6 +12,8 @@ import { DishService } from './services/dish.service';
 import { LeaderService } from './services/leader.service';
 import { PromotionService } from './services/promotion.service';
 import { ProcessHttpmsgService } from './services/process-httpmsg.service';
+import { FavoriteService } from './services/favorite.service';
+
 import { baseURL } from '../shared/baseurl';
 
 @NgModule({
@@ -19,7 +21,7 @@ import { baseURL } from '../shared/baseurl';
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    DishService, LeaderService, PromotionService, ProcessHttpmsgService,
+    DishService, LeaderService, PromotionService, ProcessHttpmsgService, FavoriteService,
     { provide: 'BaseURL', useValue: baseURL }
   ],
   bootstrap: [AppComponent],
