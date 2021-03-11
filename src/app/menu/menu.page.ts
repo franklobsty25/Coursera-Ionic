@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { Dish } from '../../shared/dish';
 import { DishService } from '../services/dish.service';
@@ -9,6 +9,7 @@ import { FavoriteService } from '../services/favorite.service';
   templateUrl: './menu.page.html',
   styleUrls: ['./menu.page.scss'],
 })
+
 export class MenuPage implements OnInit {
   public menu: string;
   dishes: Dish[];
@@ -22,6 +23,7 @@ export class MenuPage implements OnInit {
     @Inject('BaseURL') private BaseURL) { }
 
   ngOnInit() {
+
     this.menu = this.activatedRoute.snapshot.paramMap.get('id');
 
     this.dishService.getDishes()

@@ -13,7 +13,7 @@
       <ion-item-sliding *ngFor="let favorite of favorites">
         <ion-item>
           <ion-thumbnail>
-            <img src="{{BaseURL + favorite.image}}"/>
+            <ion-img src="{{BaseURL + favorite.image}}"></ion-img>
           </ion-thumbnail>
           <ion-label>{{ favorite.name }}</ion-label>
           <ion-label>{{ favorite.description }}</ion-label>

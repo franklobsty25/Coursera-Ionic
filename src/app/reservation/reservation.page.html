@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Reserve Table</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form (ngSubmit)="onSubmit()" #guestForm="ngForm">
+    <ion-item>
+      <ion-label>No. of Guests</ion-label>
+      <ion-select name="guests" [(ngModel)]="guest.guests">
+        <ion-select-option value="1">1</ion-select-option>
+        <ion-select-option value="2">2</ion-select-option>
+        <ion-select-option value="3">3</ion-select-option>
+        <ion-select-option value="4">4</ion-select-option>
+        <ion-select-option value="5">5</ion-select-option>
+        <ion-select-option value="6">6</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Smoking?</ion-label>
+      <ion-toggle name="smoking" checked="false" [(ngModel)]="guest.smoking"></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>Date and Time</ion-label>
+      <ion-datetime displayFormat="MMM DD, YYYY hh:mm A" pickerFormat="MMM DD, YYYY hh:mm A" name="dateTime"
+      [(ngModel)]="guest.dateTime"></ion-datetime>
+    </ion-item>
+    <ion-button type="submit" [disabled]="!guestForm.form.valid">Reserve</ion-button>
+  </form>
+</ion-content>

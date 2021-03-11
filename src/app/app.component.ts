@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { ModalController, MenuController } from '@ionic/angular';
+import { ReservationPage } from './reservation/reservation.page';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -13,5 +16,17 @@ export class AppComponent {
     { title: 'Favorites', url: '/favorites/Favorites', icon: 'heart'},
   ];
   
-  constructor() {}
+  constructor(public modalCtrl: ModalController,
+    private menu: MenuController) {}
+
+  async openReserve() {
+    const modal = await this.modalCtrl.create({component: ReservationPage});
+    return await modal.present();
+  }
+
+  menuClose() {
+    this.menu.close();
+  }
+
+
 }
