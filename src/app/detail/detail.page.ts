@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Dish } from '../../shared/dish';
-import { Comment } from '../../shared/comment';
+import { ToastController } from '@ionic/angular';
 import { FavoriteService } from '../services/favorite.service';
 
 @Component({
@@ -18,6 +18,7 @@ export class DetailPage implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute,
     private router: Router, private favoriteService: FavoriteService,
+    public toastCtrl: ToastController,
     @Inject('BaseURL') private BaseURL) {
 
       this.dish = JSON.parse(this.activatedRoute.snapshot.paramMap.get('id'));
@@ -33,9 +34,15 @@ export class DetailPage implements OnInit {
   ngOnInit() {
   }
 
-  addToFavorites() {
+  async addToFavorites() {
     console.log('Adding to Favorites', this.dish.id);
     this.favorite = this.favoriteService.addFavorite(this.dish.id);
+    const toast = await this.toastCtrl.create({
+      message: 'Dish ' + this.dish.id + ' added as a favorite successfully',
+      position: 'middle',
+      duration: 3000
+    });
+    toast.present();
   }
 
 
