@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { Guest } from '../../shared/guest';
 
 @Component({
   selector: 'app-reservation',
@@ -8,7 +7,7 @@ import { Guest } from '../../shared/guest';
   styleUrls: ['./reservation.page.scss'],
 })
 export class ReservationPage implements OnInit {
-  guest = new Guest(0, false, '');
+  guest = {};
 
   constructor(public modalCtrl: ModalController) { }
 

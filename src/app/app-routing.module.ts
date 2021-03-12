@@ -5,7 +5,7 @@ import { DetailPage } from './detail/detail.page';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'folder/Inbox',
+    redirectTo: 'folder/Home',
     pathMatch: 'full'
   },
   {
@@ -35,6 +35,10 @@ const routes: Routes = [
   {
     path: 'reservation',
     loadChildren: () => import('./reservation/reservation.module').then( m => m.ReservationPageModule)
+  },
+  {
+    path: 'comment',
+    loadChildren: () => import('./comment/comment.module').then( m => m.CommentPageModule)
   }
 ];
 

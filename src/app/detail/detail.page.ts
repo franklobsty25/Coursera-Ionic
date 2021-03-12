@@ -3,6 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Dish } from '../../shared/dish';
 import { ToastController } from '@ionic/angular';
 import { FavoriteService } from '../services/favorite.service';
+import { ModalController } from '@ionic/angular';
+import { ActionSheetController } from '@ionic/angular';
+import { CommentPage } from '../comment/comment.page';
 
 @Component({
   selector: 'app-detail',
@@ -18,7 +21,8 @@ export class DetailPage implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute,
     private router: Router, private favoriteService: FavoriteService,
-    public toastCtrl: ToastController,
+    public toastCtrl: ToastController, public actionSheetCtrl: ActionSheetController,
+    public modalCtrl: ModalController,
     @Inject('BaseURL') private BaseURL) {
 
       this.dish = JSON.parse(this.activatedRoute.snapshot.paramMap.get('id'));
@@ -43,6 +47,47 @@ export class DetailPage implements OnInit {
       duration: 3000
     });
     toast.present();
+  }
+
+  async onOpenComment() {
+    const modal = await this.modalCtrl.create({component: CommentPage});
+
+    await modal.present();
+
+    const data = await modal.onDidDismiss();
+    this.dish.comments.push(data.data);
+  }
+
+  async presentActionSheet() {
+    const actionSheet = await this.actionSheetCtrl.create({
+      header: 'Comment Options',
+      buttons: [
+        {
+          text: 'Add Comment',
+          icon: 'chatbubble-ellipses-outline',
+          handler: () => {
+            this.onOpenComment();
+            
+          }
+        },
+        {
+          text: 'Add Favorite',
+          icon: 'heart',
+          handler: () => {
+            this.addToFavorites();
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          icon: 'close',
+          handler: () => {
+            console.log('Cancelled clicked');
+          }
+        }
+      ]
+    });
+    await actionSheet.present();
   }
 
 

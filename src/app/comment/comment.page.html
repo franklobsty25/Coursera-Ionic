@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    <ion-title>Comment</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form #form="ngForm" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="floating">Your Name</ion-label>
+      <ion-input type="text" required [(ngModel)]="comment.author" name="author" placeholder="Enter your name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Rating</ion-label>
+      <ion-range [(ngModel)]="comment.rating" name="rating" min="1" max="5" steps="1" color="primary"></ion-range>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Your Comment</ion-label>
+      <ion-textarea rows="12" required [(ngModel)]="comment.comment" name="comment"></ion-textarea>
+    </ion-item>
+    <ion-button type="submit">Add Comment</ion-button>
+  </form>
+</ion-content>
