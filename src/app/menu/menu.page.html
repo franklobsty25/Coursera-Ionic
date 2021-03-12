@@ -9,11 +9,19 @@
 
 <ion-content class="card-background-page">
 <div *ngIf="dishes">
-  <ion-card *ngFor="let dish of dishes" (click)="dishSelected($even, dish)">
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12 col-lg-4 *ngFor="let dish of dishes">
+  <ion-card (click)="dishSelected($even, dish)">
+    <ion-card-content>
     <ion-img src="{{BaseURL + dish.image}}"></ion-img>
-    <div class="card-title">{{ dish.name }}</div>
-    <div class="card-subtitle">{{ dish.description }}</div>
+    <ion-card-title>{{ dish.name }}</ion-card-title>
+    <p>{{ dish.description }}</p>
+  </ion-card-content>
   </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>
 </div>
 <div [hidden]="dishes || errMess">
   <ion-spinner></ion-spinner>

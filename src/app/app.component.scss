@@ -117,3 +117,12 @@ ion-note {
 ion-item.selected {
   --color: var(--ion-color-primary);
 }
+
+$lt-gray: #ddd;
+$background-dark: #512DAB;
+$background-light: #9575CD;
+$background-pale: #D1C4E9;
+
+.background-pale {
+  background-color: $background-pale;
+}
