@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { ModalController, MenuController } from '@ionic/angular';
+import { ModalController, MenuController, LoadingController } from '@ionic/angular';
 import { ReservationPage } from './reservation/reservation.page';
 import { LoginPage } from './login/login.page';
+import { Network } from '@ionic-native/network/ngx';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +10,8 @@ import { LoginPage } from './login/login.page';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
+  loading: any = null;
+
   public appPages = [
     { title: 'Home', url: '/folder/Home', icon: 'home' },
     { title: 'Menu', url: '/menu/Menu', icon: 'list' },
@@ -18,7 +21,9 @@ export class AppComponent {
   ];
   
   constructor(public modalCtrl: ModalController,
-    private menu: MenuController) {}
+    private menu: MenuController,
+    private loadingCtrl: LoadingController,
+    private network: Network) {this.networkConnection()}
 
   async openReserve() {
     const modal = await this.modalCtrl.create({component: ReservationPage});
@@ -32,6 +37,28 @@ export class AppComponent {
 
   menuClose() {
     this.menu.close();
+  }
+
+  networkConnection() {
+    this.network.onDisconnect().subscribe( async () => {
+      if (!this.loading) {
+        const loading = await this.loadingCtrl.create({
+          message: 'Network Disconnected'
+        });
+        await loading.present();
+      }
+    });
+    this.network.onConnect().subscribe(() => {
+      setTimeout(() => {
+        if (this.network.type === 'wifi') {
+          console.log('We got a wifi connection, woohoo!');
+        }
+      }, 3000);
+      if (this.loading) {
+        this.loading.dismiss();
+        this.loading = null;
+      }
+    });
   }
 
 
