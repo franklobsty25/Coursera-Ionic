@@ -21,8 +21,18 @@
       <ion-icon name="mail"></ion-icon>: confusion@food.net <br><br>
       <ion-grid>
         <ion-row>
-          <ion-col><ion-icon name="call"></ion-icon>   CALL</ion-col>
-          <ion-col><ion-icon name="mail"></ion-icon>   EMAIL</ion-col>
+          <ion-col>
+            <ion-button icon-left clear small>
+              <ion-icon name="call"></ion-icon>
+              <div>CALL</div>
+            </ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button icon-left clear smaill (click)="sendEmail()">
+              <ion-icon name="mail"></ion-icon>
+              <div>EMAIL</div>
+            </ion-button>
+          </ion-col>
         </ion-row>
       </ion-grid>
     </ion-card-content>
