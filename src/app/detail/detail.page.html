@@ -1,7 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>Dish Detail</ion-title>
@@ -13,7 +12,10 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12 col-lg-4>
   <ion-card *ngIf="dish">
     <ion-img src="{{BaseURL + dish.image}}"></ion-img>
     <ion-card-content>
@@ -41,8 +43,9 @@
     <h2>Error</h2>
     <h4>{{ errMess }}</h4>
   </div>
-
-  <ion-card>
+    </ion-col>
+ 
+    <ion-col col-12 col-lg-8>
     <ion-list *ngIf="dish">
       <ion-list-header>Comments</ion-list-header>
       <ion-item *ngFor="let comment of dish.comments" text-wrap>
@@ -51,7 +54,9 @@
         <small><span> -- {{ comment.author }} {{ comment.date | date }}</span></small>
       </ion-item>
     </ion-list>
-  </ion-card>
+  </ion-col>
+  </ion-row>
+  </ion-grid>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="addToFavorites()">

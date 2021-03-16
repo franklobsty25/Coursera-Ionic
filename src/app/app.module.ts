@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicStorageModule } from '@ionic/storage';
 
 import { AppComponent } from './app.component';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 import { DishService } from './services/dish.service';
 import { LeaderService } from './services/leader.service';
@@ -23,7 +24,7 @@ import { baseURL } from '../shared/baseurl';
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, FormsModule, IonicStorageModule.forRoot()],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    DishService, LeaderService, PromotionService, ProcessHttpmsgService, FavoriteService,
+    DishService, LeaderService, PromotionService, ProcessHttpmsgService, FavoriteService, LocalNotifications,
     { provide: 'BaseURL', useValue: baseURL }
   ],
   bootstrap: [AppComponent],

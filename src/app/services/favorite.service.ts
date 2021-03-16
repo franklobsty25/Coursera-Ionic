@@ -3,6 +3,8 @@ import { Dish } from '../../shared/dish';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { DishService } from '../services/dish.service';
+import { Storage } from '@ionic/storage';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 @Injectable({
   providedIn: 'root'
@@ -10,11 +12,30 @@ import { DishService } from '../services/dish.service';
 export class FavoriteService {
   favorites: Array<any>
 
-  constructor(private dishService: DishService) { this.favorites = []; }
+  constructor(private dishService: DishService,
+    private localNotifications: LocalNotifications,
+    private storage: Storage) { this.favorites = [];
+    storage.get('favorites').then(favorites => {
+      if (favorites) {
+        this.favorites = favorites;
+      }
+      else {
+        console.log('No favorites defined');
+      }
+    }); 
+  }
 
   addFavorite(id: number): boolean {
-    if (!this.isFavorite(id))
+    if (!this.isFavorite(id)) {
       this.favorites.push(id);
+      this.storage.set('favorites', this.favorites);
+
+      this.localNotifications.schedule({
+        id: id,
+        text: 'Dish ' + id + ' added as a favorite successfully'
+      });
+    }
+    console.log('favorites', this.favorites);
     return true;
   }
 
@@ -32,6 +53,7 @@ export class FavoriteService {
     if (index >= 0) {
 
       this.favorites.splice(index, 1);
+      this.storage.set('favorites', this.favorites);
       return this.getFavorites();
     }
     else {
