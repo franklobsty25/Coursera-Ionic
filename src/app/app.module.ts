@@ -11,6 +11,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { AppComponent } from './app.component';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { EmailComposer } from '@ionic-native/email-composer/ngx';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
 import { DishService } from './services/dish.service';
 import { LeaderService } from './services/leader.service';
@@ -25,7 +26,7 @@ import { baseURL } from '../shared/baseurl';
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, FormsModule, IonicStorageModule.forRoot()],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    DishService, LeaderService, PromotionService, ProcessHttpmsgService, FavoriteService, LocalNotifications, EmailComposer,
+    DishService, LeaderService, PromotionService, ProcessHttpmsgService, FavoriteService, LocalNotifications, EmailComposer, SocialSharing,
     { provide: 'BaseURL', useValue: baseURL }
   ],
   bootstrap: [AppComponent],

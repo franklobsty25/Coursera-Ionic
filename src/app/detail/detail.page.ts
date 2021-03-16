@@ -6,6 +6,7 @@ import { FavoriteService } from '../services/favorite.service';
 import { ModalController } from '@ionic/angular';
 import { ActionSheetController } from '@ionic/angular';
 import { CommentPage } from '../comment/comment.page';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
 @Component({
   selector: 'app-detail',
@@ -22,7 +23,7 @@ export class DetailPage implements OnInit {
   constructor(private activatedRoute: ActivatedRoute,
     private router: Router, private favoriteService: FavoriteService,
     public toastCtrl: ToastController, public actionSheetCtrl: ActionSheetController,
-    public modalCtrl: ModalController,
+    public modalCtrl: ModalController, private socialSharing: SocialSharing,
     @Inject('BaseURL') private BaseURL) {
 
       this.dish = JSON.parse(this.activatedRoute.snapshot.paramMap.get('id'));
@@ -68,6 +69,28 @@ export class DetailPage implements OnInit {
           handler: () => {
             this.onOpenComment();
             
+          }
+        },
+        {
+          text: 'Share via Facebook',
+          icon: 'logo-facebook',
+          handler: () => {
+            this.socialSharing.shareViaFacebook(
+              this.dish.name + ' --- ' + this.dish.description,
+              this.BaseURL + this.dish.image, '')
+              .then(() => console.log('Posted successfully to Facebook'))
+              .catch(() => console.log('Failed to post to Facebook'));
+          }
+        },
+        {
+          text: 'Share via Twitter',
+          icon: 'logo-twitter',
+          handler: () => {
+            this.socialSharing.shareViaTwitter(
+              this.dish.name + ' -- ' + this.dish.description,
+              this.BaseURL + this.dish.image, '')
+              .then(() => console.log('Posted successfully to Twitter'))
+              .catch(() => console.log('Failed to post to Twitter'));
           }
         },
         {
