@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { User } from '../../shared/user';
+import { RegPage } from '../reg/reg.page';
 
 @Component({
   selector: 'app-login',
@@ -25,6 +26,13 @@ export class LoginPage implements OnInit {
      }
 
   ngOnInit() {
+  }
+
+  async openRegister() {
+    const modal = await this.modalCtrl.create({component: RegPage});
+    await modal.present();
+
+    modal.onDidDismiss().then(() => this.dismiss());
   }
 
   dismiss() {
