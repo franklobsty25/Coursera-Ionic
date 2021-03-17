@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { CameraResultType, CameraSource, Plugins } from '@capacitor/core';
 
 @Component({
   selector: 'app-reg',
@@ -34,6 +35,7 @@ export class RegPage implements OnInit {
       correctOrientation: true,
       allowEdit: true,
       destinationType: this.camera.DestinationType.FILE_URI,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
       encodingType: this.camera.EncodingType.PNG,
       mediaType: this.camera.MediaType.PICTURE,
       cameraDirection: this.camera.Direction.FRONT
@@ -44,6 +46,21 @@ export class RegPage implements OnInit {
       this.image = imageData;
     },
     (err) => { console.log('Error obtaining picture')});
+  }
+
+  getFromLibrary() {
+    const { Camera } = Plugins;
+
+    const takePhoto = async () => {
+      const cameraPhoto = await Camera.getPhoto({
+        resultType: CameraResultType.Uri,
+        source: CameraSource.Camera,
+        quality: 100
+      });
+    };
+    return {
+      takePhoto
+    };
   }
 
 }
